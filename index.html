@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>دعوتنامه عروسی</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn&family=Lalezar&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: url("./assets/image/1.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      overflow: hidden;
+      font-family: 'Vazirmatn', sans-serif;
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      margin-top: 100px;
+      height: 100vh;
+      margin-bottom: 40px;
+    }
+
+    .envelope {
+      position: relative;
+      margin-bottom: 50px;
+      width: 300px;
+      height: 290px;
+      background: #fff0f5;
+      border: 2px solid #ffb6c1;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+
+
+    .envelope.open .flap {
+      transform: rotateX(-160deg);
+    }
+
+    .letter {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-sizing: border-box;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: all 1s ease 0.5s;
+      font-family: 'Lalezar', cursive;
+      font-size: .9rem;
+      line-height: 2;
+    }
+
+    .envelope.open .letter {
+      transform: translateY(0);
+      opacity: 1;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-weight: bold;
+    }
+
+    .heart {
+      position: fixed;
+      top: -50px;
+      width: 20px;
+      height: 20px;
+      background: url('https://cdn-icons-png.flaticon.com/512/833/833472.png') no-repeat center/contain;
+      animation: fall 8s linear infinite;
+      opacity: 0.8;
+    }
+    .flap h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      @font-face {
+        font-family: "maryam";
+        src: url("./assets/fonts/Digi Maryam Regular.ttf");
+      }
+      font-family: "maryam";
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px) rotate(0deg);
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="music" repeat src="./assets/Media/audio.mp3" preload="auto"></audio>
+
+  <div class="envelope" onclick="openLetter(this)">
+    <div class="flap">
+      <h1 class="flap-h1">ریحانه و امیرحسین </h1>
+    </div>
+    <div class="letter">
+      با نهایت عشق و احترام<br>
+      شما را به جشن پیوند قلب‌هایمان دعوت می‌کنیم 💍<br>
+      به صرف شام و شیرینی   
+      <br>
+      جمعه 5 اریبهشت 1404<br>
+      از ساعت 19:30 الی 23
+      <br>
+       میدان بار سپاد تالار عمارت سلطانیه  💒
+    </div>
+  </div>
+
+  <script>
+    function openLetter(el) {
+      if (!el.classList.contains('open')) {
+        el.classList.add('open');
+        document.getElementById('music').play();
+        generateHearts();
+        document.getElementsByClassName("flap-h1")[0].style.display="none"
+      }
+    }
+
+    function generateHearts() {
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.animationDuration = (5 + Math.random() * 5) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 10000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
